@@ -1,0 +1,27 @@
+{
+  "name": "inside-window",
+  "version": "0.0.0",
+  "description": "",
+  "main": "dist/inside-window.js",
+  "umd:main": "dist/inside-window.umd.js",
+  "module": "dist/inside-window.mjs",
+  "source": "src/index.js",
+  "scripts": {
+    "watch" : "microbundle -w",
+    "build" : "microbundle",
+    "prepare" : "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uppercod/inside-window.git"
+  },
+  "author": "Matias Trujillo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uppercod/inside-window/issues"
+  },
+  "homepage": "https://github.com/uppercod/inside-window#readme",
+  "devDependencies": {
+    "microbundle": "^0.7.0"
+  }
+}
