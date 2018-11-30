@@ -1,7 +1,8 @@
-export function watch(selector, offsetX, offsetY, handler) {
+export function match(selector, handler, offsetX, offsetY) {
     let frameWidth = window.innerWidth + offsetX,
         frameHeight = window.innerHeight + offsetY,
         status = "__inside_window__";
+
     (typeof selector === "string"
         ? document.querySelectorAll(selector)
         : selector
@@ -9,33 +10,37 @@ export function watch(selector, offsetX, offsetY, handler) {
         let { x, y, width, height } = target.getBoundingClientRect(),
             inY,
             inX;
-        if (Math.abs(y) > frameHeight || Math.abs(x) > frameWidth) return;
 
-        y = y > offsetY ? y - offsetY : y;
-        height = height + offsetY;
-
-        x = x > offsetX ? x - offsetX : x;
-        height = height + offsetX;
-
-        if (frameHeight > y && y + height > 0) {
-            inY = true;
-        }
-        if (frameHeight > x && x + width > 0) {
-            inX = true;
-        }
-        if (inX && inY) {
-            if (!target[status]) {
-                handler(target, true);
-                target[status] = true;
-            }
-        } else {
+        if (Math.abs(y) > frameHeight || Math.abs(x) > frameWidth) {
             if (target[status]) handler(target, false);
             target[status] = false;
+        } else {
+            y = y > offsetY ? y - offsetY : y;
+            height = height + offsetY;
+
+            x = x > offsetX ? x - offsetX : x;
+            height = height + offsetX;
+
+            if (frameHeight > y && y + height > 0) {
+                inY = true;
+            }
+            if (frameHeight > x && x + width > 0) {
+                inX = true;
+            }
+            if (inX && inY) {
+                if (!target[status]) {
+                    handler(target, true);
+                }
+                target[status] = true;
+            } else {
+                if (target[status]) handler(target, false);
+                target[status] = false;
+            }
         }
     });
 }
 
-export function insideWindow({
+export function create({
     selector,
     timeout = 1000 / 8,
     offsetX = 0,
@@ -43,7 +48,7 @@ export function insideWindow({
     handler
 }) {
     let loop = setInterval(() => {
-        watch(selector, offsetX, offsetY, handler);
+        match(selector, handler, offsetX, offsetY);
     }, timeout);
     return () => clearInterval(loop);
 }

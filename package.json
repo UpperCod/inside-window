@@ -1,15 +1,15 @@
 {
   "name": "inside-window",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "description": "",
   "main": "dist/inside-window.js",
   "umd:main": "dist/inside-window.umd.js",
   "module": "dist/inside-window.mjs",
   "source": "src/index.js",
   "scripts": {
-    "watch" : "microbundle -w",
-    "build" : "microbundle",
-    "prepare" : "npm run build"
+    "watch": "microbundle -w",
+    "build": "microbundle",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",

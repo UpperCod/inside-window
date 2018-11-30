@@ -7,7 +7,9 @@ import insideWindow from "inside-window";
 
 let unsubscribe = insideWindow({
     selector : "[data-lazyload-src]",
-    offsetY : 100,
+    timeout : 1000/8,
+    offsetY : 0,
+    offsetX : 0,
     handler(target,entering ){
         if(!entering)return;
         target.src = target.dataset.lazyloadSrc;
@@ -15,3 +17,5 @@ let unsubscribe = insideWindow({
     }
 })
 ```
+
+
